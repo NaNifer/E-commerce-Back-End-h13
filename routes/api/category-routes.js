@@ -116,7 +116,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async(req, res) => {
   // update a category by its `id` value
   try {
-    Category.update(
+    await Category.update(
       {
         id: req.body.id,
         category_name: req.body.category_name
@@ -134,10 +134,29 @@ router.put('/:id', async(req, res) => {
   }
 });
 
-router.delete('/:id', (req, res) => {
+// SAMPLE Delete route for a book with a matching book_id
+// router.delete('/:book_id', (req, res) => {
+//   // Looks for the books based book_id given in the request parameters
+//   Book.destroy({
+//     where: {
+//       book_id: req.params.book_id,
+//     },
+//   })
+//     .then((deletedBook) => {
+//       res.json(deletedBook);
+//     })
+//     .catch((err) => res.json(err));
+// });
+
+router.delete('/:id', async(req, res) => {
   // delete a category by its `id` value
   try {
-    
+    await Category.destroy({
+      where: {
+        id: req.params.id,
+      }
+    });
+    res.json(deletedCategory);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
