@@ -7,7 +7,7 @@ const ProductTag = require('./ProductTag');
 // Products belongsTo Category
 Product.belongsTo(Category, {
   foreignKey: 'category_id',
-  // Do I need this?
+  // !!!! Suggested by Asha. Need to check against testing destroyCategory
   // onDelete: 'CASCADE',
 });
 
