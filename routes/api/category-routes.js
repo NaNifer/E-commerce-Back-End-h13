@@ -2,6 +2,25 @@ const router = require('express').Router();
 const { Category, Product } = require('../../models');
 const { findAll } = require('../../models/Product');
 
+// Asaha's suggestion
+// router.get('/', async (req, res) => {
+//   try {
+//     Category = await Category.findAll({
+//       attributes: ['id', 'category_name'],
+//       include: [
+//         {
+//           model: Product,
+//           attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
+//         }
+//       ]
+//     });
+//     res.json(Category);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ error });
+//   }
+// });
+
 // The `/api/categories` endpoint
 
 router.get('/', async (req, res) => {
@@ -84,9 +103,9 @@ router.post('/', async (req, res) => {
 });
 
 // SAMPLE UPDATE
-// router.put('/:book_id', (req, res) => {
+// router.put('/:book_id', async (req, res) => {
 //   //Calls the update method on the Book model
-//   Book.update(
+//   const updatedBook = await Book.update(
 //     {
 //       // All the fields you can update and the data attached to the request body.
 //       title: req.body.title,
@@ -102,21 +121,16 @@ router.post('/', async (req, res) => {
 //         book_id: req.params.book_id,
 //       },
 //     }
-//   )
-//     .then((updatedBook) => {
-//       res.json(updatedBook);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.json(err);
-//     });
+//   );
+  
+//   res.json(updatedBook);
 // });
 
 
 router.put('/:id', async(req, res) => {
   // update a category by its `id` value
   try {
-    await Category.update(
+    updatedCategory = await Category.update(
       {
         id: req.body.id,
         category_name: req.body.category_name
@@ -135,23 +149,21 @@ router.put('/:id', async(req, res) => {
 });
 
 // SAMPLE Delete route for a book with a matching book_id
-// router.delete('/:book_id', (req, res) => {
-//   // Looks for the books based book_id given in the request parameters
-//   Book.destroy({
+// router.delete('/:book_id', async (req, res) => {
+//   // Looks for the book based on the book_id given in the request parameters
+//   const deletedBook = await Book.destroy({
 //     where: {
 //       book_id: req.params.book_id,
 //     },
-//   })
-//     .then((deletedBook) => {
-//       res.json(deletedBook);
-//     })
-//     .catch((err) => res.json(err));
+//   });
+  
+//   res.json(deletedBook);
 // });
 
 router.delete('/:id', async(req, res) => {
   // delete a category by its `id` value
   try {
-    await Category.destroy({
+    deletedCategory = await Category.destroy({
       where: {
         id: req.params.id,
       }
