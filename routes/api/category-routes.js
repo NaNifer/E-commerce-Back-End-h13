@@ -71,7 +71,8 @@ router.put('/:id', async(req, res) => {
 router.delete('/:id', async(req, res) => {
   try {
     console.log(req.params.id, "line73");
-    deletedCategory = await Category.destroy({
+    const deletedCategory = await Category.findByPk(req.params.id);
+    await Category.destroy({
       where: {
         id: req.params.id,
       }
