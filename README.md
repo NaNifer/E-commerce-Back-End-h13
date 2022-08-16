@@ -49,7 +49,7 @@ THEN I am able to successfully create, update, and delete data in my database
 
 ### Installation
 
-Video demo for installation and usage: [DEMO]()
+Video demo for installation and usage: [DEMO](https://drive.google.com/file/d/1xIrBSLUEbD01DcNzAcvq3XgNc7zgqDG8/view)
 
 - From your terminal in the app folder, type npm i to install the node_modules.
 - Use the dotenv package to use environment variables to store your MySQL username, password, and database name.
